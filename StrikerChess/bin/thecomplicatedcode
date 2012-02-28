@@ -1,0 +1,214 @@
+ if(move)
+            {                
+                  Object source = e.getSource();
+                  JPanel pnlTemp = (JPanel)source;         
+                  int intX = (pnlTemp.getX()/57);
+                  System.out.println("intX="+intX);             
+                  int intY = (pnlTemp.getY()/57);
+                  System.out.println("intY="+intY);
+                 // this.boolMoveSelection = !this.boolMoveSelection;
+                 
+                  if(pq==true)
+                  {
+                	  this.pntMoveTo = new Point(intX, intY);
+                	  r=pntMoveTo.y;s=pntMoveTo.x;
+                	  System.out.println("r="+r+" s="+s);
+                	  this.boolMoveSelection=false;
+                	  rs=true;
+                  }
+                  if(pq==false)
+                  {
+                        this.pntMoveFrom = new Point(intX, intY);
+                        p=pntMoveFrom.y;q=pntMoveFrom.x;
+                        System.out.println("p="+p+" q="+q);
+                        this.boolMoveSelection=true;
+                        pq=true;
+                  }
+                  if(pq==true&&rs==true)
+                  {
+                	  if(p==r&&q==s) move=!move;
+                	  System.out.println("p="+p+" q="+q+"r="+r+" s="+s);
+                	  try {
+						mygame.display();
+					  } catch (Exception e1) {
+						e1.printStackTrace();
+					  }
+					  if(this.strChessBoard[p][q].toString().charAt(1) == 'W') moveno=1;
+					  else moveno=0;
+					  if(this.strChessBoard[p][q].toString().charAt(1) == 'B') {move=!move;wrongmove=true;}
+					  if(wrongmove==false)
+					  {
+					  if(this.strChessBoard[p][q].toString().charAt(1) == 'W'&&!this.pntMoveFrom.equals(this.pntMoveTo))
+                      {
+                            if(      this.strChessBoard[p][q].toString().trim() != "")
+                                  if(mygame.ispossible(p, q, r, s, moveno))
+                                  {                
+                                	  t=mygame.chessboard[p][q];f=mygame.chessboard[r][s];
+                                	  mygame.chessboard[r][s]=mygame.chessboard[p][q];
+              						mygame.chessboard[p][q]='0';
+              						try {
+										mygame.display();
+									} catch (Exception e1) {									
+										e1.printStackTrace();
+									}
+              						try {
+										if(ultimatechess.ischeck()==1) {System.out.print("ischeck is 1");bluah=1;}
+									} catch (Exception e1) {
+										
+										e1.printStackTrace();
+									}
+									if(bluah!=1)
+									{
+                                        this.strChessBoard[r][s] = this.strChessBoard[p][q].toString();
+                                        this.strChessBoard[p][q] = "  ";
+                                        this.moveChessPiece();     
+									}   
+                                       
+                						
+										
+                                  }
+                                  else
+                                  {
+                                        JOptionPane.showMessageDialog(this, "Stop putting fart level moves", "Warning :P", JOptionPane.ERROR_MESSAGE);
+                                        this.makeChessPieceDifferent(false);move=!move;
+                                  }
+                      }
+                      else
+                      {  this.makeChessPieceDifferent(false);}
+                	  ;
+					  }
+					  if(bluah==1) 
+						{
+							mygame.chessboard[p][q] = t;
+							 mygame.chessboard[r][s] = f;
+						
+							 try {
+								mygame.display();
+							} catch (Exception e1) {
+								
+								e1.printStackTrace();
+							}
+							 bluah=0;
+							 move=!move; ///check this statement
+						}
+                	  move=!move;
+                	  pq=false;rs=false;
+                	  wrongmove=false;
+                  }
+                  try {
+    					if(ultimatechess.ischeck()==1) JOptionPane.showMessageDialog(null,"White king is under attack da....protect it");
+    				} catch (HeadlessException e2) {
+    				
+    					e2.printStackTrace();
+    				} catch (Exception e2) {
+    					
+    					e2.printStackTrace();
+    				}
+            }
+                         
+            
+            else
+            {
+            	Object source = e.getSource();
+                JPanel pnlTemp = (JPanel)source;         
+                int intX = (pnlTemp.getX()/57);
+                System.out.println("intX="+intX);             
+                int intY = (pnlTemp.getY()/57);
+                System.out.println("intY="+intY);
+               // this.boolMoveSelection = !this.boolMoveSelection;
+                
+                if(pq==true)
+                {
+              	  this.pntMoveTo = new Point(intX, intY);
+              	  r=pntMoveTo.y;s=pntMoveTo.x;
+              	  System.out.println("r="+r+" s="+s);
+              	  this.boolMoveSelection=false;
+              	  rs=true;
+                }
+                if(pq==false)
+                {
+                      this.pntMoveFrom = new Point(intX, intY);
+                      p=pntMoveFrom.y;q=pntMoveFrom.x;
+                      System.out.println("p="+p+" q="+q);
+                      this.boolMoveSelection=true;
+                      pq=true;
+                }
+                if(pq==true&&rs==true)
+                {
+              	  if(p==r&&q==s) move=!move;
+              	  System.out.println("p="+p+" q="+q+"r="+r+" s="+s);
+              	  try {
+						mygame.display();
+					  } catch (Exception e1) {
+						e1.printStackTrace();
+					  }
+					  if(this.strChessBoard[p][q].toString().charAt(1) == 'W') {move=!move;wrongmove=true;}
+					  if(this.strChessBoard[p][q].toString().charAt(1) == 'B') moveno=2;
+					  else moveno=0;
+					  if(wrongmove==false)
+					  {
+				 if(this.strChessBoard[p][q].toString().charAt(1) == 'B'&&!this.pntMoveFrom.equals(this.pntMoveTo))
+                    {
+                          if(      this.strChessBoard[p][q].toString().trim() != "")
+                                if(mygame.ispossible(p, q, r, s, moveno))
+                                {           
+                                	t=mygame.chessboard[p][q];f=mygame.chessboard[r][s];
+                                	 mygame.chessboard[r][s]=mygame.chessboard[p][q];
+               						mygame.chessboard[p][q]='0';
+               						try {
+										mygame.display();
+									} catch (Exception e1) {									
+										e1.printStackTrace();
+									}
+               						try {
+										if(ultimatechess.ischeck()==2) {System.out.print("ischeck is 2");bluah=1;}
+									} catch (Exception e1) {
+										
+										e1.printStackTrace();
+									}
+									if(bluah!=1)
+									{
+                                      this.strChessBoard[r][s] = this.strChessBoard[p][q].toString();
+                                      this.strChessBoard[p][q] = "  ";
+                                      this.moveChessPiece();     
+									}
+              						
+										
+                                }
+                                else
+                                {
+                                      JOptionPane.showMessageDialog(this, "Stop putting fart level moves", "Warning :P", JOptionPane.ERROR_MESSAGE);
+                                      this.makeChessPieceDifferent(false);move=!move;
+                                }
+                    }
+                    else
+                    {  this.makeChessPieceDifferent(false);}
+              	  
+					  }
+				 if(bluah==1) 
+					{
+						mygame.chessboard[p][q] = t;
+						 mygame.chessboard[r][s] = f; 
+						 try {
+							mygame.display();
+						} catch (Exception e1) {
+							
+							e1.printStackTrace();
+						}
+						 bluah=0;
+						 move=!move; ///check this statement
+					} 
+              	  move=!move;
+              	  pq=false;rs=false;
+                  wrongmove=false;
+            }
+            	try {
+					if(ultimatechess.ischeck()==2) JOptionPane.showMessageDialog(null,"Black king is under attack da...... protect it");
+				} catch (HeadlessException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				} catch (Exception e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+            }
